@@ -1,0 +1,1 @@
+// hacer funciones declaradas en anagramas-hash.h
