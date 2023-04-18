@@ -25,7 +25,7 @@ struct list {               // lista enlazada simple
 
 struct hashnode {           // nodo de una lista enlazada simple
     char *key;              // clave asociada a este nodo
-    struct list *wlist;     // lista de palabras asociadas a esta clave
+    struct list *wlist;     // lista de palabras asociadas a esta clave (letras de palabra ordenadas)
     struct hashnode *next;  // siguiente de la lista o NULL si es el último
 };
 
@@ -35,7 +35,7 @@ struct listnode {           // nodo de una lista enlazada simple
 };
 
 
-struct hashnode *anagrams[HASHSIZE];
+struct hashnode *anagrams[HASHSIZE]; //array de punteros a hashnodes
 
 extern struct list *list_create(void);
     // crea una lista vacía, retorna puntero a la misma
