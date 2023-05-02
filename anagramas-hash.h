@@ -2,6 +2,7 @@
 #define MAXWORD     32
 #define HASHSIZE    10457   // un número primo lejano a una potencia de 2
 #define DICT        "/usr/share/dict/spanish"
+#include <stdio.h>
 /*
  * fgetword_normalizada: lee una palabra en español de un archivo, la normaliza
  * (saca tildes y eñes y las convierte en vocales y enes)
@@ -33,7 +34,6 @@ struct listnode {           // nodo de una lista enlazada simple
     char *word;             // palabra asociada a este nodo
     struct listnode *next;  // siguiente de la lista o NULL si es el último
 };
-
 
 struct hashnode *anagrams[HASHSIZE]; //array de punteros a hashnodes
 

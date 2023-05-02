@@ -1,5 +1,6 @@
 // hacer funciones declaradas en anagramas-hash.h
 #include "anagramas-hash.h"
+#include "wrappers.h"
 #include <stdio.h>
 #include <string.h>
 
@@ -60,27 +61,33 @@ struct hashnode *create_hashnode(char *key, char *word){
 }
 
 extern struct hashnode *hash_insert_word(struct hashnode *node, char *key, char *word){
-    unsigned int h = hash(key);
-    struct hashnode *hash_de_esa_clave = anagrams[h]; // posicion del anagrams
-    
-    //hash de esa clave tiene claves distintas pero que al hashearlas colisionan
-    while ((hash_de_esa_clave->next) != NULL ){ //busco key en hash
+    //unsigned int h = hash(key);
+    //struct hashnode *hash_de_esa_clave = anagrams[h]; // posicion del anagrams
+    // node = anagrams[h]
+    struct hashnode *temp = node;
 
-        if (strcmp(hash_de_esa_clave->key, key) == 0){ //si encuentro la clave
+    if (node == NULL){
+        return create_hashnode(key,word);
+    }else{
+         //hash de esa clave tiene claves distintas pero que al hashearlas colisionan
+        while ((node->next) != NULL ){ //busco key en hash
 
-            hash_de_esa_clave->wlist = list_insert_last_word(hash_de_esa_clave->wlist, word);
-            //inserto al final de la lista
-            return hash_de_esa_clave->wlist->first;
+            if (strcmp(node->key, key) == 0){ //si encuentro la clave
+
+                node->wlist = list_insert_last_word(node->wlist, word);
+                //inserto al final de la lista
+                return node;
+            }
+            node = node->next;
         }
-        hash_de_esa_clave = hash_de_esa_clave->next;
+        //si llega hasta aca no encontro la key
+       
+        struct hashnode *nuevo = create_hashnode(key,word);
+        nuevo->next = temp;
+        return nuevo;
+
     }
-    //si llega hasta aca no encontro la key
-    struct hashnode *segundo_hash_de_esa_clave = anagrams[h];
-
-    anagrams[h]= create_hashnode(key, word);
-    anagrams[h]->next = segundo_hash_de_esa_clave;
-
-    return anagrams[h];
+    
 }
     // busca key en el hash (y si no encuentra inserta key al inicio en lista simple)
     // luego agrega palabra al final de la lista de anagramas asociadas a la key
@@ -104,7 +111,7 @@ extern char *sort_word(char *word){
     // ordena EN EL LUGAR la palabra 'word' según código ASCII en forma ascendente
 
 extern void print_anagrams(struct hashnode *hn){
-    printf("Clave: %d | ", hn->key);
+    printf("Clave: %s | ", hn->key);
 
     struct listnode *lista_actual = hn->wlist->first;
     while (lista_actual->next != NULL){
