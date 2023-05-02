@@ -28,7 +28,7 @@ main(int argc, char *argv[])
         sort_word(key);
         h = hash(key) % HASHSIZE;
         anagrams[h] = hash_insert_word(anagrams[h], key, word);
-        /* DEBUG
+        /*// DEBUG
         if (strcmp(word, "padre") == 0 || h == 1977 ) {
             printf("se insertó %s con clave %s en hash %u\n", word, key, h);
             for (hn=anagrams[h]; hn != NULL; hn = hn->next) {
@@ -36,6 +36,7 @@ main(int argc, char *argv[])
             }
         }
         */
+        
     }
 
     if (argc > 1 && (strcmp(argv[1], "-a") == 0 || strcmp(argv[1], "--all") == 0) ) {

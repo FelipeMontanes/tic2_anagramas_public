@@ -35,7 +35,7 @@ struct listnode {           // nodo de una lista enlazada simple
     struct listnode *next;  // siguiente de la lista o NULL si es el último
 };
 
-struct hashnode *anagrams[HASHSIZE]; //array de punteros a hashnodes
+//struct hashnode *anagrams[HASHSIZE]; //array de punteros a hashnodes
 
 extern struct list *list_create(void);
     // crea una lista vacía, retorna puntero a la misma
