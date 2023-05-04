@@ -37,6 +37,7 @@ extern struct list *list_insert_last_word(struct list *l, char *word){
         l->last = l->last->next;
         //}
     }
+    l->qty = l->qty +1; 
     return l;
 
 }
@@ -107,13 +108,16 @@ extern char *sort_word(char *word){
     // ordena EN EL LUGAR la palabra 'word' según código ASCII en forma ascendente
 
 extern void print_anagrams(struct hashnode *hn){
-    printf("Clave: %s | ", hn->key);
 
-    struct listnode *lista_actual = hn->wlist->first;
-    while (lista_actual->next != NULL){
-        printf("| %s ", lista_actual->word );
-        lista_actual= lista_actual->next;
+    if (hn != NULL){
+        printf("Clave: %s | ", hn->key);
+
+        struct listnode *lista_actual = hn->wlist->first;
+        while (lista_actual != NULL){
+            printf("| %s ", lista_actual->word );
+            lista_actual= lista_actual->next;
+        }
+        printf("\n");
     }
-    printf("\n");
 }
     // escribe (printf) la lista de anagramas para ese hashnode
